@@ -1,0 +1,32 @@
+{
+  "name": "react-url-matcher",
+  "version": "0.1.0",
+  "description": "Can be used to match and generate url paths agains predefined patterns. To be used when applying routing in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm set init.author.url \"http://brentertz.com\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnoesiboe/react-url-matcher.git"
+  },
+  "keywords": [
+    "routing",
+    "url",
+    "generator",
+    "url",
+    "matcher",
+    "router"
+  ],
+  "author": "Gijs Nieuwenhuis <gijsnieuwenhuis@gmail.com>",
+  "licenses": [
+    {
+      "type": "ISC",
+      "url": "https://github.com/gnoesiboe/react-url-matcher/blob/master/LICENSE-MIT"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/gnoesiboe/react-url-matcher/issues"
+  },
+  "homepage": "https://github.com/gnoesiboe/react-url-matcher#readme"
+}
