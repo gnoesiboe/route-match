@@ -227,5 +227,19 @@ describe('UrlMatcher', function () {
 
             assert.ok(myUrlMatcher.match('/some-path') instanceof RouteMatch);
         });
+
+        it('Allows you to to define route parameters', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/user/:id')
+            ]);
+
+            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+
+            var match = myUrlMatcher.match('/user/10');
+
+            assert.ok(match instanceof RouteMatch);
+            assert.ok(typeof match.params['id'] !== 'undefined');
+            assert.ok(parseInt(match.params['id']) === 10);
+        });
     });
 });
