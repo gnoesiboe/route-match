@@ -241,5 +241,16 @@ describe('UrlMatcher', function () {
             assert.ok(typeof match.params['id'] !== 'undefined');
             assert.ok(parseInt(match.params['id']) === 10);
         });
+
+        it('Allows you to specify a regex against route parameters', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/user/:id(\\d+)')
+            ]);
+
+            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+
+            assert.ok(myUrlMatcher.match('/user/12') instanceof RouteMatch);
+            assert.ok(myUrlMatcher.match('/user/test') === null);
+        });
     });
 });
