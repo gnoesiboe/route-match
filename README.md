@@ -1,11 +1,11 @@
-# url-matcher
+# route-match
 
-NPM package that can be used to match and generate url paths agains predefined patterns. To be used when applying routing in javascript.
+NPM package that can be used to match and generate url paths agains predefined patterns. Can be used when applying routing in javascript client-side and backend application.
 
 ## Installation
 
 ```bash
-npm install --save url-matcher
+npm install --save route-match
 ```
 
 ## Usage
