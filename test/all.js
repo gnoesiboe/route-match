@@ -100,6 +100,46 @@ describe('RouteCollection', function () {
         });
     });
 
+    describe('Removing routes from the collection', function () {
+        it('Allows me to remove a route from the collection', function () {
+            var myRoute = new library.Route('some_route', '/some-path');
+
+            var myRouteCollection = new library.RouteCollection([
+                myRoute
+            ]);
+
+            assert.ok(myRouteCollection.count() === 1);
+
+            myRouteCollection.remove(myRoute);
+
+            assert.ok(myRouteCollection.count() === 0);
+        });
+
+        it('Allows me to remove a route from the collection by name', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/some-path')
+            ]);
+
+            assert.ok(myRouteCollection.count() === 1);
+
+            myRouteCollection.removeByName('some_route');
+
+            assert.ok(myRouteCollection.count() === 0);
+        });
+
+        it('Allows me to remove all routes from the collection at once', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/some-path')
+            ]);
+
+            assert.ok(myRouteCollection.count() === 1);
+
+            myRouteCollection.clear();
+
+            assert.ok(myRouteCollection.count() === 0);
+        });
+    });
+
     describe('Adding routes to an existing collection', function () {
         it('Has more routes in it when a new route was added', function () {
             var myRouteCollection = new library.RouteCollection([]);
