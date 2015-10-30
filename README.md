@@ -1,6 +1,6 @@
 # route-match
 
-NPM package that can be used to match and generate url paths agains predefined patterns. Can be used when applying routing in javascript client-side and backend application.
+NPM package that can be used to match and generate url paths agains predefined patterns. Can be used when applying routing in javascript client-side and backend applications. Uses ECMA6 javascript standard.
 
 ## Installation
 
