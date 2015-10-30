@@ -252,5 +252,23 @@ describe('UrlMatcher', function () {
             assert.ok(myUrlMatcher.match('/user/12') instanceof RouteMatch);
             assert.ok(myUrlMatcher.match('/user/test') === null);
         });
+
+        it('Supports query parameters', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/user/:id(\\d+)')
+            ]);
+
+            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+
+            var match = myUrlMatcher.match('/user/12?test=10&test2=water');
+
+            assert.ok(match instanceof RouteMatch);
+
+            assert.ok(typeof match.params['test'] !== 'undefined');
+            assert.ok(match.params['test'] === '10');
+
+            assert.ok(typeof match.params['test2'] !== 'undefined');
+            assert.ok(match.params['test2'] === 'water');
+        });
     });
 });
