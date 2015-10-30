@@ -98,6 +98,20 @@ describe('RouteCollection', function () {
 
             assert.ok(found === otherRoute);
         });
+
+        it('Allows me to retrieve all routes from a collection at once', function () {
+            var myRoute = new library.Route('some_route', '/some-path');
+
+            var myRouteCollection = new library.RouteCollection([
+                myRoute
+            ]);
+
+            assert.ok(myRouteCollection.count() === 1);
+
+            var anArrayWithAllRoutes = myRouteCollection.all();
+
+            assert.ok(anArrayWithAllRoutes.indexOf(myRoute) !== -1);
+        });
     });
 
     describe('Removing routes from the collection', function () {
