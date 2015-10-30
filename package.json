@@ -1,34 +1,35 @@
 {
-  "name": "react-url-matcher",
+  "name": "route-match",
   "version": "0.1.0",
-  "description": "Can be used to match and generate url paths agains predefined patterns. To be used when applying routing in javascript",
+  "description": "Can be used to match and generate url paths agains predefined patterns. Can be used when applying routing in javascript client-side and backend applications. Uses ECMA6 javascript standard.",
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel/register"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gnoesiboe/react-url-matcher.git"
+    "url": "git+https://github.com/gnoesiboe/route-match.git"
   },
   "keywords": [
     "routing",
     "url",
     "generator",
     "url",
+    "path",
     "matcher",
     "router"
   ],
   "author": "Gijs Nieuwenhuis <gijsnieuwenhuis@gmail.com>",
   "licenses": [
     {
-      "type": "ISC",
+      "type": "MIT",
       "url": "https://github.com/gnoesiboe/react-url-matcher/blob/master/LICENSE-MIT"
     }
   ],
   "bugs": {
-    "url": "https://github.com/gnoesiboe/react-url-matcher/issues"
+    "url": "https://github.com/gnoesiboe/route-matcher/issues"
   },
-  "homepage": "https://github.com/gnoesiboe/react-url-matcher#readme",
+  "homepage": "https://github.com/gnoesiboe/route-matcher#readme",
   "devDependencies": {
     "chai": "^3.4.0",
     "mocha": "^2.3.3"
