@@ -2,6 +2,8 @@ import { assert } from 'chai';
 import * as library from './../index.js';
 import InvalidRouteCollectionError from './../lib/error/InvalidRouteCollectionError.js';
 import InvalidRouteError from './../lib/error/InvalidRouteError.js';
+import RouteMissingError from './../lib/error/RouteMissingError.js';
+import InvalidParameterError from './../lib/error/InvalidParameterError.js';
 import RouteMatch from './../lib/model/routeMatch.js';
 
 describe('RouteCollection', function () {
@@ -269,6 +271,96 @@ describe('UrlMatcher', function () {
 
             assert.ok(typeof match.params['test2'] !== 'undefined');
             assert.ok(match.params['test2'] === 'water');
+        });
+    });
+});
+
+describe('UrlGenerator', function () {
+    describe('Instantiation', function () {
+        it('Throws an error when instantiated without a route collection', function () {
+            try {
+                new library.UrlGenerator();
+
+                assert.notOk('Should not get to this point');
+            } catch (error) {
+                assert.ok(error instanceof InvalidRouteCollectionError);
+            }
+        });
+
+        it('Allows instantiation with a route collection', function () {
+            var myUrlGenerator = new library.UrlGenerator(new library.RouteCollection());
+
+            assert.ok(myUrlGenerator instanceof library.UrlGenerator);
+        });
+    });
+
+    describe('Generating urls', function () {
+        it('throws an error when you try to generate an url for an non-existant route', function () {
+            var myRouteCollection = new library.RouteCollection([]);
+
+            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+
+            try {
+                myUrlGenerator.generate('non_existant_route');
+
+                assert.notOk('Should not get to this point');
+            } catch (error) {
+                assert.ok(error instanceof RouteMissingError);
+            }
+        });
+
+        it('Generates an url without parameters', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('home', '/')
+            ]);
+
+            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+
+            assert.ok(myUrlGenerator.generate('home') === '/');
+        });
+
+        it('Generates an url with parameters', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('user_detail', '/user/:id')
+            ]);
+
+            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+
+            var generatedPath = myUrlGenerator.generate('user_detail', {
+                id: 10
+            });
+
+            assert.ok(generatedPath === '/user/10');
+        });
+
+        it('Validates if the supplied parameters match the required pattern', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('user_detail', '/user/:id(\\d+)')
+            ]);
+
+            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+
+            try {
+                myUrlGenerator.generate('user_detail', {
+                    id: 'not_allowed_value'
+                });
+            } catch (error) {
+                assert.ok(error instanceof InvalidParameterError);
+            }
+        });
+
+        it('Adds extra parameters as query parameters to the url', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('home', '/')
+            ]);
+
+            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+
+            var generatedUrl = myUrlGenerator.generate('home', {
+                test: 'other'
+            });
+
+            assert.ok(generatedUrl === '/?test=other');
         });
     });
 });
