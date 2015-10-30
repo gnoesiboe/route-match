@@ -2,6 +2,7 @@ import { assert } from 'chai';
 import * as library from './../index.js';
 import InvalidRouteCollectionError from './../lib/error/InvalidRouteCollectionError.js';
 import InvalidRouteError from './../lib/error/InvalidRouteError.js';
+import RouteMatch from './../lib/model/routeMatch.js';
 
 describe('RouteCollection', function () {
     describe('Instantiation', function () {
@@ -21,7 +22,7 @@ describe('RouteCollection', function () {
         });
 
         it('Throws an Error when instantiated with an array that does contain non-route instances', function () {
-            var arrayWithNonAcceptedValue = [ 'non accepted value' ];
+            var arrayWithNonAcceptedValue = ['non accepted value'];
 
             try {
                 new library.RouteCollection(arrayWithNonAcceptedValue);
@@ -200,9 +201,31 @@ describe('UrlMatcher', function () {
                 new library.Route('some_route', '/some-path')
             ]);
 
-            var myRouteMatcher = new library.UrlMatcher(myRouteCollection);
+            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
 
-            assert.ok(myRouteMatcher instanceof library.UrlMatcher);
+            assert.ok(myUrlMatcher instanceof library.UrlMatcher);
+        });
+    });
+
+    describe('Matching urls', function () {
+        it('Returns null when no route matches', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/some-path')
+            ]);
+
+            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+
+            assert.ok(myUrlMatcher.match('/some-other-route') === null);
+        });
+
+        it('Returns a RouteMatch instance when a route matches', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/some-path')
+            ]);
+
+            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+
+            assert.ok(myUrlMatcher.match('/some-path') instanceof RouteMatch);
         });
     });
 });
