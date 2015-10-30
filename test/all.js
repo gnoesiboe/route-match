@@ -162,20 +162,47 @@ describe('RouteCollection', function () {
 
             assert.ok(myRouteCollection.count() === 1);
         });
-    })
-});
+    });
 
-/*describe('UrlGenerator', function () {
-    describe('Instantiation', function () {
+    describe('Loping through the routes in the collection', function () {
+        it('Allows you to loop through all items', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/some-path')
+            ]);
 
-        it('Throws an Error when instantiated without route collection', function () {
-            try {
-                new UrlGenerator();
+            var count = 0;
 
-                assert.ok(false, 'UrlGenerator could be instantiated without route collection');
-            } catch (error) {
-                assert.ok(error instanceof Error);
-            }
+            myRouteCollection.each(function (route) {
+                assert.ok(route instanceof library.Route);
+
+                count++;
+            });
+
+            assert.ok(myRouteCollection.count() === count);
         });
     });
-});*/
+});
+
+describe('UrlMatcher', function () {
+    describe('Instantiation', function () {
+        it('Throws an Error when instantiated without route collection', function () {
+            try {
+                new library.UrlMatcher();
+
+                assert.nogOk('UrlGenerator could be instantiated without route collection');
+            } catch (error) {
+                assert.ok(error instanceof InvalidRouteCollectionError);
+            }
+        });
+
+        it('Instantiates when providing a valid instance of Route Collection', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('some_route', '/some-path')
+            ]);
+
+            var myRouteMatcher = new library.UrlMatcher(myRouteCollection);
+
+            assert.ok(myRouteMatcher instanceof library.UrlMatcher);
+        });
+    });
+});
