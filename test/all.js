@@ -273,6 +273,27 @@ describe('UrlMatcher', function () {
             assert.ok(match.params['test2'] === 'water');
         });
     });
+
+    describe('supplying route playloads', function () {
+        it('supplies the route\'s payload, when the route is matched', function () {
+            var myRouteCollection = new library.RouteCollection([
+                new library.Route('home', '/', {
+                    _controller: 'home',
+                    _action: 'index'
+                })
+            ]);
+
+            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+
+            var match = myUrlMatcher.match('/');
+
+            assert.ok(typeof match.routePayload['_controller'] !== 'undefined');
+            assert.ok(match.routePayload._controller === 'home');
+
+            assert.ok(typeof match.routePayload['_action'] !== 'undefined');
+            assert.ok(match.routePayload._action === 'index');
+        })
+    })
 });
 
 describe('UrlGenerator', function () {
