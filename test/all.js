@@ -186,11 +186,11 @@ describe('RouteCollection', function () {
     });
 });
 
-describe('UrlMatcher', function () {
+describe('PathMatcher', function () {
     describe('Instantiation', function () {
         it('Throws an Error when instantiated without route collection', function () {
             try {
-                new library.UrlMatcher();
+                new library.PathMatcher();
 
                 assert.nogOk('UrlGenerator could be instantiated without route collection');
             } catch (error) {
@@ -203,9 +203,9 @@ describe('UrlMatcher', function () {
                 new library.Route('some_route', '/some-path')
             ]);
 
-            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+            var myPathMatcher = new library.PathMatcher(myRouteCollection);
 
-            assert.ok(myUrlMatcher instanceof library.UrlMatcher);
+            assert.ok(myPathMatcher instanceof library.PathMatcher);
         });
     });
 
@@ -215,9 +215,9 @@ describe('UrlMatcher', function () {
                 new library.Route('some_route', '/some-path')
             ]);
 
-            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+            var myPathMatcher = new library.PathMatcher(myRouteCollection);
 
-            assert.ok(myUrlMatcher.match('/some-other-route') === null);
+            assert.ok(myPathMatcher.match('/some-other-route') === null);
         });
 
         it('Returns a RouteMatch instance when a route matches', function () {
@@ -225,9 +225,9 @@ describe('UrlMatcher', function () {
                 new library.Route('some_route', '/some-path')
             ]);
 
-            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+            var myPathMatcher = new library.PathMatcher(myRouteCollection);
 
-            assert.ok(myUrlMatcher.match('/some-path') instanceof RouteMatch);
+            assert.ok(myPathMatcher.match('/some-path') instanceof RouteMatch);
         });
 
         it('Allows you to to define route parameters', function () {
@@ -235,9 +235,9 @@ describe('UrlMatcher', function () {
                 new library.Route('some_route', '/user/:id')
             ]);
 
-            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+            var myPathMatcher = new library.PathMatcher(myRouteCollection);
 
-            var match = myUrlMatcher.match('/user/10');
+            var match = myPathMatcher.match('/user/10');
 
             assert.ok(match instanceof RouteMatch);
             assert.ok(typeof match.params['id'] !== 'undefined');
@@ -249,10 +249,10 @@ describe('UrlMatcher', function () {
                 new library.Route('some_route', '/user/:id(\\d+)')
             ]);
 
-            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+            var myPathMatcher = new library.PathMatcher(myRouteCollection);
 
-            assert.ok(myUrlMatcher.match('/user/12') instanceof RouteMatch);
-            assert.ok(myUrlMatcher.match('/user/test') === null);
+            assert.ok(myPathMatcher.match('/user/12') instanceof RouteMatch);
+            assert.ok(myPathMatcher.match('/user/test') === null);
         });
 
         it('Supports query parameters', function () {
@@ -260,9 +260,9 @@ describe('UrlMatcher', function () {
                 new library.Route('some_route', '/user/:id(\\d+)')
             ]);
 
-            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+            var myPathMatcher = new library.PathMatcher(myRouteCollection);
 
-            var match = myUrlMatcher.match('/user/12?test=10&test2=water');
+            var match = myPathMatcher.match('/user/12?test=10&test2=water');
 
             assert.ok(match instanceof RouteMatch);
 
@@ -283,9 +283,9 @@ describe('UrlMatcher', function () {
                 })
             ]);
 
-            var myUrlMatcher = new library.UrlMatcher(myRouteCollection);
+            var myPathMatcher = new library.PathMatcher(myRouteCollection);
 
-            var match = myUrlMatcher.match('/');
+            var match = myPathMatcher.match('/');
 
             assert.ok(typeof match.routePayload['_controller'] !== 'undefined');
             assert.ok(match.routePayload._controller === 'home');

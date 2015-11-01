@@ -15,7 +15,7 @@ When using a client that does not support ECMA6, please use a javascript compile
 ### Generating URLs
 
 ```javascript
-import { Route, RouteCollection, UrlMatcher } from 'url-matcher';
+import { Route, RouteCollection, UrlGenerator } from 'route-match';
 
 var myRouteCollection = new RouteCollection([
     new Route('user_detail', '/user/:id(\\d+)')
@@ -34,13 +34,13 @@ console.log(myUrlGenerator.generate('user_detail', { id: 10 })); // result: /use
 ### Matching urls against patterns
 
 ```javascript
-import { Route, RouteCollection, UrlMatcher } from 'url-matcher';
+import { Route, RouteCollection, PathMatcher } from 'route-match';
 
 var myRouteCollection = new RouteCollection([
     new Route('user_detail', '/user/:id(\\d+)')
 ]);
 
-var myUrlMatcher = new UrlMatcher(myRouteCollection);
+var myPathMatcher = new PathMatcher(myRouteCollection);
 
 console.log(myUrlGenerator.match('/user/10'); // result: instance of RouteMatch containing route name, payload and parameters 
 ```
