@@ -15,15 +15,15 @@ When using a client that does not support ECMA6, please use a javascript compile
 ### Generating URLs
 
 ```javascript
-import { Route, RouteCollection, UrlGenerator } from 'route-match';
+import { Route, RouteCollection, PathGenerator } from 'route-match';
 
 var myRouteCollection = new RouteCollection([
     new Route('user_detail', '/user/:id(\\d+)')
 ]);
 
-var myUrlGenerator = new UrlGenerator(myRouteCollection);
+var myPathGenerator = new PathGenerator(myRouteCollection);
 
-console.log(myUrlGenerator.generate('user_detail', { id: 10 })); // result: /user/10
+console.log(myPathGenerator.generate('user_detail', { id: 10 })); // result: /user/10
 ```
 
 **Remarks:**
@@ -42,7 +42,7 @@ var myRouteCollection = new RouteCollection([
 
 var myPathMatcher = new PathMatcher(myRouteCollection);
 
-console.log(myUrlGenerator.match('/user/10'); // result: instance of RouteMatch containing route name, payload and parameters 
+console.log(myPathGenerator.match('/user/10'); // result: instance of RouteMatch containing route name, payload and parameters 
 ```
 
 **Remarks:**

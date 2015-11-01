@@ -192,7 +192,7 @@ describe('PathMatcher', function () {
             try {
                 new library.PathMatcher();
 
-                assert.nogOk('UrlGenerator could be instantiated without route collection');
+                assert.notOk('PathGenerator could be instantiated without route collection');
             } catch (error) {
                 assert.ok(error instanceof InvalidRouteCollectionError);
             }
@@ -296,11 +296,11 @@ describe('PathMatcher', function () {
     })
 });
 
-describe('UrlGenerator', function () {
+describe('PathGenerator', function () {
     describe('Instantiation', function () {
         it('Throws an error when instantiated without a route collection', function () {
             try {
-                new library.UrlGenerator();
+                new library.PathGenerator();
 
                 assert.notOk('Should not get to this point');
             } catch (error) {
@@ -309,9 +309,9 @@ describe('UrlGenerator', function () {
         });
 
         it('Allows instantiation with a route collection', function () {
-            var myUrlGenerator = new library.UrlGenerator(new library.RouteCollection());
+            var myPathGenerator = new library.PathGenerator(new library.RouteCollection());
 
-            assert.ok(myUrlGenerator instanceof library.UrlGenerator);
+            assert.ok(myPathGenerator instanceof library.PathGenerator);
         });
     });
 
@@ -319,10 +319,10 @@ describe('UrlGenerator', function () {
         it('throws an error when you try to generate an url for an non-existant route', function () {
             var myRouteCollection = new library.RouteCollection([]);
 
-            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+            var myPathGenerator = new library.PathGenerator(myRouteCollection);
 
             try {
-                myUrlGenerator.generate('non_existant_route');
+                myPathGenerator.generate('non_existant_route');
 
                 assert.notOk('Should not get to this point');
             } catch (error) {
@@ -335,9 +335,9 @@ describe('UrlGenerator', function () {
                 new library.Route('home', '/')
             ]);
 
-            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+            var myPathGenerator = new library.PathGenerator(myRouteCollection);
 
-            assert.ok(myUrlGenerator.generate('home') === '/');
+            assert.ok(myPathGenerator.generate('home') === '/');
         });
 
         it('Generates an url with parameters', function () {
@@ -345,9 +345,9 @@ describe('UrlGenerator', function () {
                 new library.Route('user_detail', '/user/:id')
             ]);
 
-            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+            var myPathGenerator = new library.PathGenerator(myRouteCollection);
 
-            var generatedPath = myUrlGenerator.generate('user_detail', {
+            var generatedPath = myPathGenerator.generate('user_detail', {
                 id: 10
             });
 
@@ -359,10 +359,10 @@ describe('UrlGenerator', function () {
                 new library.Route('user_detail', '/user/:id(\\d+)')
             ]);
 
-            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+            var myPathGenerator = new library.PathGenerator(myRouteCollection);
 
             try {
-                myUrlGenerator.generate('user_detail', {
+                myPathGenerator.generate('user_detail', {
                     id: 'not_allowed_value'
                 });
             } catch (error) {
@@ -375,9 +375,9 @@ describe('UrlGenerator', function () {
                 new library.Route('home', '/')
             ]);
 
-            var myUrlGenerator = new library.UrlGenerator(myRouteCollection);
+            var myPathGenerator = new library.PathGenerator(myRouteCollection);
 
-            var generatedUrl = myUrlGenerator.generate('home', {
+            var generatedUrl = myPathGenerator.generate('home', {
                 test: 'other'
             });
 
