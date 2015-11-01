@@ -10,6 +10,8 @@ npm install --save route-match
 
 ## Usage
 
+When using a client that does not support ECMA6, please use a javascript compiler like [Babel](http://babeljs.io/) to compile the code to a readable format.
+
 ### Generating URLs
 
 ```javascript
