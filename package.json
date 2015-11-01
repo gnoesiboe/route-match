@@ -23,13 +23,13 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/gnoesiboe/react-url-matcher/blob/master/LICENSE-MIT"
+      "url": "https://github.com/gnoesiboe/route-match/blob/master/LICENSE-MIT"
     }
   ],
   "bugs": {
-    "url": "https://github.com/gnoesiboe/route-matcher/issues"
+    "url": "https://github.com/gnoesiboe/route-match/issues"
   },
-  "homepage": "https://github.com/gnoesiboe/route-matcher#readme",
+  "homepage": "https://github.com/gnoesiboe/route-match#readme",
   "devDependencies": {
     "chai": "^3.4.0",
     "mocha": "^2.3.3"
