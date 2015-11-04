@@ -1,10 +1,10 @@
 import { assert } from 'chai';
 import * as library from './../index.js';
-import InvalidRouteCollectionError from './../lib/error/InvalidRouteCollectionError.js';
-import InvalidRouteError from './../lib/error/InvalidRouteError.js';
-import RouteMissingError from './../lib/error/RouteMissingError.js';
-import InvalidParameterError from './../lib/error/InvalidParameterError.js';
-import RouteMatch from './../lib/model/routeMatch.js';
+import InvalidRouteCollectionError from './../build/error/InvalidRouteCollectionError.js';
+import InvalidRouteError from './../build/error/InvalidRouteError.js';
+import RouteMissingError from './../build/error/RouteMissingError.js';
+import InvalidParameterError from './../build/error/InvalidParameterError.js';
+import RouteMatch from './../build/model/routeMatch.js';
 
 describe('RouteCollection', function () {
     describe('Instantiation', function () {
@@ -43,7 +43,6 @@ describe('RouteCollection', function () {
             assert.ok(instance instanceof library.RouteCollection, 'Could not instantiate with valid route collection');
         });
     });
-
     describe('Counting routes', function () {
         it('Returns the valid number of routes in the collection when there are no items in it', function () {
             var myRouteCollection = new library.RouteCollection();
@@ -185,6 +184,7 @@ describe('RouteCollection', function () {
         });
     });
 });
+
 
 describe('PathMatcher', function () {
     describe('Instantiation', function () {

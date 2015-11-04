@@ -30,6 +30,7 @@ console.log(myPathGenerator.generate('user_detail', { id: 10 })); // result: /us
 
 * when you supply more parameters then the route pattern requires, the extra parameters are added to the generated url as query parameters
 * when you supply parameters that do not match the requirements an error will be thrown
+* Feel free to use non-ECMA6 syntax
 
 ### Matching urls against patterns
 
@@ -49,9 +50,16 @@ console.log(myPathGenerator.match('/user/10'); // result: instance of RouteMatch
 
 * When the supplied url contains query parameters, they will also be available in the eventual RouteMatch object
 * When no route is matched, `null` is returned
+* Feel free to use non-ECMA6 syntax
 
 ## Running unit tests
 
 ```bash
 npm test
+```
+
+## Compiling ECMA6 code to 'regular' javascript
+
+```bash
+npm run compile
 ```

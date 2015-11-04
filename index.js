@@ -1,9 +1,9 @@
-import PathGenerator from './lib/utility/pathGenerator.js';
-import PathMatcher from './lib/utility/pathMatcher.js';
-import RouteCollection from './lib/collection/routeCollection.js';
-import Route from './lib/model/route.js';
+var PathGenerator = require('./build/utility/pathGenerator'),
+    PathMatcher = require('./build/utility/pathMatcher.js'),
+    RouteCollection = require('./build/collection/routeCollection.js'),
+    Route = require('./build/model/route.js');
 
-export default {
+module.exports = {
     Route: Route,
     RouteCollection: RouteCollection,
     PathMatcher: PathMatcher,
